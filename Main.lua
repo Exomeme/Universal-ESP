@@ -1,5 +1,4 @@
 local espLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Sirius/request/library/esp/esp.lua'),true))()
-
 local Config = {
     WindowName = "Universal ESP",
 	Color = Color3.fromRGB(255,128,64),
@@ -11,11 +10,20 @@ local Window = Library:CreateWindow(Config, game:GetService("CoreGui"))
 
 local Tab1 = Window:CreateTab("Visuals")
 local Tab2 = Window:CreateTab("MISC")
+local Tab3 = Window:CreateTab("Exp")
 
-local Section1 = Tab1:CreateSection("Main")
-local Section2 = Tab1:CreateSection("Main Options")
+local Section1 = Tab1:CreateSection("Visuals")
+local Section2 = Tab1:CreateSection("Boxes")
+local Section5 = Tab1:CreateSection("Health")
+local Section6 = Tab1:CreateSection("Distance")
+local Section7 = Tab1:CreateSection("Tracer")
+local Section8 = Tab1:CreateSection("Chams")
+local Section9 = Tab1:CreateSection("Arrows")
+local Section10 = Tab1:CreateSection("Names")
+
 local Section3 = Tab2:CreateSection("MiscMain")
 local Section4 = Tab2:CreateSection("MiscSecondary")
+local Section100 = Tab3:CreateSection("TESTING FEATURES")
 
 local Label1 = Section1:CreateLabel("Label 1")
 Label1:UpdateText("lol")
@@ -127,7 +135,7 @@ local Toggle = Section1:CreateToggle("Arrows", nil, function(State)
         	    espLib.options.outOfViewArrowsOutline = false
         end
 end)
-local Dropdown1 = Section2:CreateDropdown("Tracers Location", {"Top","Mouse","Bottom"}, function(Name)
+local Dropdown1 = Section7:CreateDropdown("Tracers Location", {"Top","Mouse","Bottom"}, function(Name)
 	if Name == "Top" then
 	espLib.options.tracerOrigin = "Top"
 	elseif Name == "Mouse" then
@@ -137,17 +145,26 @@ local Dropdown1 = Section2:CreateDropdown("Tracers Location", {"Top","Mouse","Bo
 
 	end
 end)
-local Slider2 = Section2:CreateSlider("Tracer Transparency", 0,1,0.5,false, function(State)
+local Slider2 = Section7:CreateSlider("Tracer Transparency", 0,1,0.5,false, function(State)
     espLib.options.tracerTransparency  = State
 end)
-local Colorpicker1 = Section2:CreateColorpicker("boxesColor", function(Color)
-	espLib.options.boxesColor = Color3.new(Color)
+local Colorpicker1 = Section7:CreateColorpicker("Tracer Colour", function(Color)
+	espLib.options.tracerColor = Color
+end)
+
+local Colorpicker1 = Section2:CreateColorpicker("Boxes Color", function(Color)
+	espLib.options.boxesColor = Color
 end)
 local Colorpicker1 = Section2:CreateColorpicker("Box fill Color", function(Color)
-	espLib.options.boxFillColor = Color3.new(Color)
+	espLib.options.boxFillColor = Color
 end)
-Colorpicker1:AddToolTip("This is WIP NOT WORKING NOW.")
-local Slider2 = Section2:CreateSlider("chams Transparency", 0,1,1,false, function(State)
+local Slider2 = Section2:CreateSlider("Boxes Transparency", 0,1,1,false, function(State)
+    espLib.options.boxesTransparency = State
+end)
+local Slider2 = Section2:CreateSlider("Boxes Fill Transparency", 0,1,1,false, function(State)
+    espLib.options.boxFillTransparency = State
+end)
+local Slider2 = Section8:CreateSlider("chams Transparency", 0,1,1,false, function(State)
     espLib.options.chamsFillTransparency = State
     espLib.options.chamsOutlineTransparency = State
 
@@ -156,25 +173,31 @@ local Slider2 = Section2:CreateSlider("Boxes Transparency", 0,1,1,false, functio
     espLib.options.boxesTransparency = State
     espLib.options.boxFillTransparency = State
 end)
-local Slider2 = Section2:CreateSlider("Health bar Transparency", 0,1,1,false, function(State)
+local Slider2 = Section5:CreateSlider("Health bar Transparency", 0,1,1,false, function(State)
     espLib.options.healthBarsTransparency = State
 end)
-local Slider2 = Section2:CreateSlider("Health Text Transparency", 0,1,1,false, function(State)
+local Slider2 = Section5:CreateSlider("Health Text Transparency", 0,1,1,false, function(State)
     espLib.options.healthTextTransparency = State
 end)
-local Slider2 = Section2:CreateSlider("Arrow fill Transparency", 0,1,1,false, function(State)
+local Slider2 = Section9:CreateSlider("Arrow fill Transparency", 0,1,1,false, function(State)
     espLib.options.outOfViewArrowsTransparency = State
 end)
-local Slider2 = Section2:CreateSlider("Arrow Outline Transparency", 0,1,1,false, function(State)
+local Slider2 = Section9:CreateSlider("Arrow Outline Transparency", 0,1,1,false, function(State)
     espLib.options.outOfViewArrowsOutlineTransparency = State
 end)
-local Slider2 = Section2:CreateSlider("Arrow Size", 0,50,15,false, function(State)
+local Slider2 = Section9:CreateSlider("Arrow Size", 0,50,15,false, function(State)
     espLib.options.outOfViewArrowsSize = State
 end)
-local Slider2 = Section2:CreateSlider("Arrow Radius", 25,1000,100,false, function(State)
+local Slider2 = Section9:CreateSlider("Arrow Radius", 25,1000,100,false, function(State)
     espLib.options.outOfViewArrowsRadius = State
 end)
 
+local Colorpicker1 = Section8:CreateColorpicker("Chams Outline Colour", function(Color)
+	espLib.options.chamsOutlineColor = Color
+end)
+local Colorpicker1 = Section8:CreateColorpicker("Chams fill Colour", function(Color)
+	espLib.options.chamsFillColor = Color
+end)
 local Toggle3 = Section3:CreateToggle("UI Toggle", nil, function(State)
 	Window:Toggle(State)
 end)
@@ -183,7 +206,7 @@ Toggle3:CreateKeybind(tostring(Config.Keybind):gsub("Enum.KeyCode.", ""), functi
 end)
 Toggle3:SetState(true)
 
-local Colorpicker3 = Section3:CreateColorpicker("UI Color", function(Color)
+local Colorpicker3 = Section2:CreateColorpicker("UI Color", function(Color)
 	Window:ChangeColor(Color)
 end)
 Colorpicker3:UpdateColor(Config.Color)
@@ -222,3 +245,28 @@ local Slider4 = Section4:CreateSlider("Tile Scale",0,1,nil,false, function(Value
 	Window:SetTileScale(Value)
 end)
 Slider4:SetValue(0.5)
+
+
+
+
+
+
+------ testing -------------------------------------------------------------------------------------------
+local Button001 = Section1000:CreateButton("PRINT ESP CASHE", function()
+    print(espLib.espCache)
+end)
+
+local Slider22 = Section100:CreateSlider("ESP RENDER",0,100000,nil,false, function(State)
+    if Value > 99999 then
+        espLib.options = math.huge
+    else
+        espLib.options = State 
+    end    
+end)
+local Toggle22 = Section1000:CreateToggle("Allow scaled render", nil, function(State)
+	if State == true then
+        	    espLib.options.limitDistance = true
+        elseif State == false then
+        	    espLib.options.limitDistance = false
+        end
+end)
